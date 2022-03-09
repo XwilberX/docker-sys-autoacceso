@@ -1,0 +1,131 @@
+.logo1{
+	float: left;
+	
+	padding-top: 27px;
+
+}
+.tituloCaa{
+	font-family: sans-serif;
+	float: left;
+	text-align: left;
+	padding-left: 7px;
+	color: #203552;
+}
+.g1 a{
+	float: right;
+	text-align: right;
+	padding-top: 60px;
+	padding-right: 200px;
+	font-size: 20px;
+	color: #203552;
+}
+
+.btnLog {
+
+  background-color: #203552; 
+  border: solid;
+  border-color:  #203552; 
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+  position: relative;
+  right:70px;
+  top:50px;
+
+}
+.btnLog:hover {
+
+  background-color: #D3AA2C; 
+  border: solid;
+  border-color:  #203552; 
+  border-radius: 25px;
+  color: #203552;
+  font-weight: bold;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+  position: relative;
+  right:70px;
+  top:50px;
+
+}
+.g2{
+	width: 100%;
+}
+
+nav li{
+  position: relative;
+  bottom: 15px;
+	display: inline-block;
+}
+
+.g2 li a{
+
+	font: 20px vedrana;
+	color:white;
+	text-decoration: none;
+
+}
+
+.g2 li a:hover{
+
+	color: #D3AA2C;
+	font: 20px vedrana;
+	text-decoration: none;
+}
+
+.g2 ul{
+	text-align:  center;
+	list-style: none;
+	padding: 0;
+	display: flex;
+
+}
+
+.g2 li{
+
+	flex-grow: 1;
+}
+
+.slider{
+	width: 100%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.slider figure {
+	display: flex;
+	padding: 0;
+	width: 250%;
+
+	animation: slider 40s infinite alternate;
+}
+
+.slider figure img {
+	width: 20%;
+}
+
+@keyframes slider{
+	 0% { margin-left: 0; }
+	 25% { margin-left: 0; }
+
+	 30% { margin-left: -100%; }
+	 55% { margin-left: -100%; }
+
+	 60% { margin-left: -200%; }
+	 85% { margin-left: -200%; }
+
+}
+
+.g4{
+	padding-top: 100px;
+}

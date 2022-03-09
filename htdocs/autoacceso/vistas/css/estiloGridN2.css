@@ -1,0 +1,117 @@
+
+.grid-container {
+  display: grid;
+}
+
+.g1{
+
+grid-column: 1 / span 8;
+background-color: #D3AA2C;
+height: 150px;
+
+}
+
+@media screen and ( max-width: 1220px ){
+		
+.g1{
+
+height: 290px;
+
+}
+
+}
+
+
+
+@media screen and ( max-width: 500px ){
+		
+.g1{
+
+height: 230px;
+
+}
+
+}
+
+
+.g2{
+grid-column: 1 / span 8; 
+grid-row: 2;
+height: 50px;
+background-color: #203552;
+}
+
+.g3{
+
+grid-column: 1/ span 8;
+grid-row: 3 /5;
+min-height: 529px;
+
+}
+
+
+.g6{
+grid-column: 1 / span 8;
+grid-row: 5; 	
+padding: 50px; 
+background-color: #203552;
+
+
+}
+
+.grid-container > div{
+ 
+   font-size: 30px;
+  text-align: center;
+
+}
+
+@media screen and ( max-width: 600px ){
+	.g6{
+
+height: 100px;
+}
+}
+
+
+#homeCuadrado{
+	
+	flex-direction: column;
+
+}
+
+
+
+.g-medio2{
+	
+	position: relative;
+	border: 2px solid #aaa; 
+	float: right;
+	margin-right: 35px;
+	height: 425px;
+	width: 68%;
+	
+}
+
+.g-medio1{
+	
+	position: relative;
+	border: 2px solid #aaa; 
+	float: left;
+	margin-left: 35px;
+	height: 425px;
+	width: 27%;
+	
+}
+
+.g-medio2_5{
+	
+	position: relative;
+	border: 2px solid #aaa; 
+	float: right;
+	margin-right: 35px;
+	height: 360px;
+	width: 68%;
+	
+}
+

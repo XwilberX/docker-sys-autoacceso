@@ -1,0 +1,105 @@
+version: "2"
+
+services:
+################ LAMP Stack.
+  php-fpm:
+# Pls, check image tags, latest is php-7, but we have php-5 too.
+    # build: docker/images/php-fpm/.
+    image: lordius/alpine-php_fpm
+    # image: lordius/alpine-php_fpm:php-5
+    # image: lordius/alpine-php_fpm:php-7 
+    volumes:
+      - ./crontasks.txt:/home/crontasks.txt
+      - ./htdocs:/var/www/localhost/htdocs
+      # Attach sample configs if necessary.      
+      # - ./docker/runtime/php7:/temp_configs_dir/php7      
+      # - ./docker/runtime/php5:/temp_configs_dir/php5
+    environment:
+      DRUSH_VERSION: 8.x
+      PHP_SHOW_ERRORS: 1
+      CRONTAB_ENABLED: 0
+      PHP_FPM_PORT: 7000
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -i -t
+      PHP_SENDMAIL_HOST: mailhog
+      PHP_SENDMAIL_PORT: 1025
+      PHP_XDEBUG_ENABLED: 1
+      PHP_XDEBUG_PORT: 9000
+      PHP_MAX_EXECUTION_TIME: 250
+      PHP_UPLOAD_MAX_FILESIZE: 1024M
+      PHP_POST_MAX_SIZE: 756M
+      PHP_ALLOW_URL_FOPEN: "On"
+      PHP_ALWAYS_POPULATE_RAW_POST_DATA: -1
+      PHP_SHORT_OPEN_TAG: 1
+      PHP_MEMORY_LIMIT: 1024M
+    networks:
+      internal:
+      shared:
+        ipv4_address: 172.55.0.2
+    extra_hosts:
+      - "site.dockerlamp:172.55.0.4" 
+
+  apache2_mpm:
+    image: lordius/alpine-apache
+    links:
+      - php-fpm
+    depends_on:
+      - php-fpm
+    # Attach sample configs if necessary.      
+    # volumes:
+    #   - ./docker/runtime/apache2:/temp_configs_dir/apache2
+    volumes_from:
+      - php-fpm
+    environment:
+      APACHE_TIMEOUT: 300
+      DOCUMENT_ROOT: /var/www/localhost/htdocs
+      PROXY_PASS: fcgi://php-fpm:7000/var/www/localhost/htdocs
+      APACHE_LISTEN_PORT: 80
+    ports:
+      - '80:80'
+    networks:
+      internal:
+      shared:
+        ipv4_address: 172.55.0.3
+
+  nginx:
+    image: lordius/alpine-nginx
+    links:
+      - apache2_mpm
+    depends_on:
+      - apache2_mpm
+    # Attach sample configs if necessary.      
+    # volumes:
+    #   - ./docker/runtime/nginx:/temp_configs_dir/nginx              
+    volumes_from:
+      - php-fpm
+    environment:
+      KEEPALIVE_TIMEOUT: 3000
+      LISTEN_PORT: 80
+      SERVER_ROOT: /var/www/localhost/htdocs
+      SERVER_NAME: localhost
+      CLIENT_MAX_BODY_SIZE: 32m
+      PROXY_CONNECT_TIMEOUT: 3000
+      PROXY_SEND_TIMEOUT: 3000
+      PROXY_READ_TIMEOUT: 3000
+      SEND_TIMEOUT: 3000
+      PROXY_PASS: http://apache2_mpm:80
+    ports:
+      - '81:80'
+    networks:
+      internal:
+      shared:
+        ipv4_address: 172.55.0.4
+
+networks:
+  internal:
+    driver_opts:
+      internal: "true"
+    driver: bridge    
+  shared:
+    driver_opts:
+      enable_ipv6: "true"
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.55.0.0/16
+        gateway: 172.55.0.1
