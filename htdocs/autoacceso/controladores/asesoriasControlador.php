@@ -339,7 +339,9 @@
 						$tabla.=' <th>Nivel</th>';
 						$tabla.=' <th>Condición</th>';
 						$tabla.=' <th>Comprensión lectora</th>';
-						$tabla.='<th>Dependencia</th>';
+						if($_SESSION['privilegio_scaa']==4){
+							$tabla.='<th>Dependencia</th>';
+						}
 						$tabla.=' <th>Teléfono</th>';
 					}
 					
