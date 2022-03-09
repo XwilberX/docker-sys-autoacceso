@@ -36,9 +36,9 @@ if(isset($_SESSION['busqueda_exalumno']) && $_SESSION['busqueda_exalumno']!=""){
  ?> 
         <h2 >Resultados de la búsqueda</h2>
 <?php  
- require_once"./controladores/egresadoControlador.php";
-  $ins_egresado= new egresadoControlador(); 
-  echo $ins_egresado->paginador_exalumno_controlador($pagina[1],5,$_SESSION['privilegio_scaa'],$_SESSION['curp_scaa'],$pagina[0], $busqueda);
+  require_once "./controladores/alumnoControlador.php";
+  $ins_alumno = new alumnoControlador(); 
+  echo $ins_alumno->paginador_exalumnos_controlador($pagina[1], 10, $_SESSION['privilegio_scaa'], $_SESSION['curp_scaa'], $pagina[0], $busqueda);
   
   }?>
 </div>
