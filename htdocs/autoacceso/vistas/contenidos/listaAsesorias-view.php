@@ -44,9 +44,10 @@ if($_SESSION['id_scaa']!=$pagina[1]){
                 <?php 
                 if(isset($_SESSION['busqueda_proximas_asesorias']) && $_SESSION['busqueda_proximas_asesorias']!=""){
                  $busqueda=$_SESSION['busqueda_proximas_asesorias'];
-                 ?> <h2 >Resultados de la búsqueda</h2> <?php 
+                //  echo $_SESSION['busqueda_proximas_asesorias'];
+                 ?> <h2 >Resultados de la búsqueda</h2> <?php
+                 echo $ins_asesorias->buscar_proximas_asesorias_controlador($pagina[1],10,$_SESSION['privilegio_scaa'],$_SESSION['curp_scaa'],$pagina[0],$busqueda);
                }
-               echo $ins_asesorias->buscar_proximas_asesorias_controlador($pagina[1],10,$_SESSION['privilegio_scaa'],$_SESSION['curp_scaa'],$pagina[0],$busqueda);
               }else{
                 echo $ins_asesorias->lista_asesorias_controlador($pagina[1],10,$_SESSION['privilegio_scaa'],$_SESSION['curp_scaa'],$pagina[0],"");
               }

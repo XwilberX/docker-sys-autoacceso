@@ -1,6 +1,6 @@
 <?php 
 
-	const SERVER="192.168.1.74";
+	const SERVER="10.30.48.226";
 	const DB="centro55_caa_db";
 	const USER="root";
 	const PASS="wil99";
